@@ -1,0 +1,9 @@
+// ==UserScript==
+// @name         truyenfull unlock
+// @match        *://truyenfull.live/*
+// @run-at       document-start
+// @grant        none
+// ==/UserScript==
+document.cookie = "truyenfull_cf_ad_content=" + Date.now()
+  + "; expires=" + new Date(Date.now() + 365*864e5).toUTCString()
+  + "; path=/";
