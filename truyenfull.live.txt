@@ -1,3 +1,25 @@
-truyenfull.live###ads_click_view_chapter
-truyenfull.live###ads-unlock-reminder
-truyenfull.live###chapter-c:style(display:block !important)
+! === TruyenFull.live ad block ===
+||iads.staticscdn.net^
+||eyep.blog^
+||imgaidtruyen.8cache.com^
+||cdn.jsdelivr.net/npm/swiper@11/$domain=truyenfull.live
+||googletagmanager.com^$domain=truyenfull.live
+||google-analytics.com^$domain=truyenfull.live
+||connect.facebook.net^$domain=truyenfull.live
+||eyep.blog^$popup
+
+truyenfull.live##.adfill
+truyenfull.live##.adfill_in_page
+truyenfull.live##.show_ads_google
+truyenfull.live##.ads-holder
+truyenfull.live##.ads-taboola-truyen
+truyenfull.live##.ads-responsive
+truyenfull.live##.ads-responsive-unit
+truyenfull.live##.header-ads
+truyenfull.live##.header-ads-full
+truyenfull.live##[id^="ads-"]
+truyenfull.live##[id^="ads_"]
+truyenfull.live##[id^="header-ads"]
+truyenfull.live##[class^="ads-"]
+truyenfull.live##[class*=" ads-"]
+truyenfull.live##[data-note]

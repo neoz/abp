@@ -1,9 +1,48 @@
 // ==UserScript==
-// @name         truyenfull unlock
-// @match        *://truyenfull.live/*
+// @name         TruyenFull.live Anti-Ads
+// @namespace    local.antitruyenfull
+// @version      1.0
+// @description  Chan QC + popunder + mo khoa noi dung
+// @match        https://truyenfull.live/*
+// @match        https://*.truyenfull.live/*
 // @run-at       document-start
 // @grant        none
 // ==/UserScript==
-document.cookie = "truyenfull_cf_ad_content=" + Date.now()
-  + "; expires=" + new Date(Date.now() + 365*864e5).toUTCString()
-  + "; path=/";
+
+(function () {
+  'use strict';
+
+  // 1. Chan popunder / cua so QC
+  const _open = window.open;
+  window.open = function (url, name, ...rest) {
+    if (name === 'popunder' || /eyep\.blog|staticscdn|8cache\.com/i.test(url || '')) return null;
+    return _open.call(window, url, name, ...rest);
+  };
+
+  // 2. Dat cookie de web khong hien popup "CLICK ADS"
+  try {
+    document.cookie = 'truyenfull_cf_ad_content=' + Date.now() +
+      ';expires=' + new Date(Date.now() + 3600e3).toUTCString() + ';path=/';
+  } catch (e) {}
+
+  const AD = '[id^="ads-"],[id^="ads_"],[class^="ads-"],[class*=" ads-"],' +
+             '.adfill,.show_ads_google,.ads-holder,[data-note]';
+
+  function clean() {
+    document.querySelectorAll(AD).forEach(el => el.remove());
+    // 3. Mo khoa noi dung truyen
+    document.getElementById('ads_click_view_chapter')?.remove();
+    document.getElementById('ads-unlock-reminder')?.remove();
+    const c = document.getElementById('chapter-c');
+    if (c && c.style.display === 'none') c.style.display = '';
+  }
+
+  // Chay ngay + theo doi DOM lien tuc
+  clean();
+  document.addEventListener('DOMContentLoaded', () => {
+    clean();
+    new MutationObserver(clean).observe(document.documentElement, { childList: true, subtree: true });
+    const t = setInterval(clean, 1000);
+    setTimeout(() => clearInterval(t), 15000);
+  });
+})();
